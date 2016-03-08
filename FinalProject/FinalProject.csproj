@@ -47,11 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer Forms\View Model\CustomerInformationViewModel.cs" />
     <Compile Include="Customer Forms\View Model\CustomerSearchViewModel.cs" />
-    <Compile Include="CustomersSearchForm.cs">
+    <Compile Include="Forms\CustomerInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomersSearchForm.Designer.cs">
+    <Compile Include="Forms\CustomerInformationForm.Designer.cs">
+      <DependentUpon>CustomerInformationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomersSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomersSearchForm.Designer.cs">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerUtility.cs" />
@@ -67,13 +74,20 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\CustomerInformation.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CustomersSearchForm.resx">
+    <EmbeddedResource Include="Forms\CustomerInformationForm.resx">
+      <DependentUpon>CustomerInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomersSearchForm.resx">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

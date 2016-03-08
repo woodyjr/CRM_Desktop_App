@@ -165,9 +165,13 @@ namespace FinalProject.Data
             return colCustomerAddress;
 
         }
-        
 
-    public List<Customer> GetCustomers()
+        public List<CustomerInformation> GetCustomerInformation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> GetCustomers()
         {
             throw new NotImplementedException();
         }
