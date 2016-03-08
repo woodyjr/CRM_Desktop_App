@@ -1,13 +1,34 @@
-﻿using System;
+﻿using CRMSystem.Models;
+using FinalProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Models
+namespace FinalProject
 {
-    public class Customer
+    class CustomerSearchViewModels
     {
+        public CustomerSearchViewModels(Customer cust)
+        {
+            CustomerID = cust.CustomerID;
+            NameStyle = cust.NameStyle;
+            Title = cust.Title;
+            FirstName = cust.FirstName;
+            MiddleName = cust.MiddleName;
+            LastName = cust.LastName;
+            Suffix = cust.Suffix;
+            CompanyName = cust.CompanyName;
+            SalesPerson = cust.SalesPerson;
+            EmailAddress = cust.EmailAddress;
+            Phone = cust.Phone;
+            PasswordHash = cust.PasswordHash;
+            PasswordSalt = cust.PasswordSalt;
+            rowguid = cust.rowguid;
+            ModifiedDate = cust.ModifiedDate;
+
+        }
 
         public int CustomerID { get; set; }
         public Boolean NameStyle { get; set; }
@@ -24,8 +45,5 @@ namespace FinalProject.Models
         public string PasswordSalt { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
-
-
-
     }
 }

@@ -12,55 +12,57 @@ namespace FinalProject.Data
 {
     public class CustomerUtility : ICustomerUtility
     {
-​
-	public List<Customer> GetCustomers()
+
+    public List<Customer> CustomerSearch(string query)
         {
-            List<Customer> CustomerUtil = new List<Customer>();
-            CustomerUtil.Add(new Customer { FirstName = "Josh", LastName = "Woody" });
-            return CustomerUtil;
-
-        }
-
-
-        public Customer GetCustomer(int CustomerID)
-        {
+            
             //Build Sql Connection
             SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=FinalProject;Trusted_Connection=True;";
+            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
 
             //Sql Commmand
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SalesLT.Customer WHERE CustomerID = @CustomerID";
-            cmd.Parameters.AddWithValue("@customerID", CustomerID);
+            cmd.CommandText = @"
+                    SELECT *
+                    FROM SalesLT.Customer
+                    WHERE
+            FirstName LIKE '%' + @query + '%' OR
+            LastName LIKE '%' + @query + '%'
+            ";
+
+            cmd.Parameters.AddWithValue("@query", query);
 
             //Open Reader
-            Customer customerObj;
-            customerObj = null;
+            // Customer customerObj;
+            // customerObj = null;
+            List<Customer> customerObj = new List<Customer>();
+
             try
             {
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    customerObj = new Customer
+                    customerObj.Add(new Customer
                     {
+
                         CustomerID = (int)reader["CustomerID"],
                         NameStyle = (Boolean)reader["NameStyle"],
                         Title = (string)reader["Title"],
-                        FirstName = (string)reader["CustomerID"],
-                        MiddleName = (string)reader["CustomerID"],
-                        LastName = (string)reader["CustomerID"],
-                        Suffix = (string)reader["CustomerID"],
-                        CompanyName = (string)reader["CustomerID"],
-                        SalesPerson = (string)reader["CustomerID"],
-                        EmailAddress = (string)reader["CustomerID"],
-                        Phone = (string)reader["CustomerID"],
-                        PasswordHash = (string)reader["CustomerID"],
-                        PasswordSalt = (string)reader["CustomerID"],
-                        rowguid = (Guid)reader["CustomerID"],
-                        ModifiedDate = (DateTime)reader["CustomerID"]
-                    };
-                };
+                        FirstName = (string)reader["FirstName"],
+                        MiddleName = (string)reader["MiddleName"],
+                        LastName = (string)reader["LastName"],
+                        Suffix = (string)reader["Suffix"],
+                        CompanyName = (string)reader["CompanyName"],
+                        SalesPerson = (string)reader["SalesPerson"],
+                        EmailAddress = (string)reader["EmailAddress"],
+                        Phone = (string)reader["Phone"],
+                        PasswordHash = (string)reader["PasswordHash"],
+                        PasswordSalt = (string)reader["PasswordSalt"],
+                        rowguid = (Guid)reader["rowguid"],
+                        ModifiedDate = (DateTime)reader["ModifiedDate"]
+                    });
+                }
                 reader.Close();
             }
             catch (Exception ex)
@@ -72,14 +74,14 @@ namespace FinalProject.Data
         }
 
 
-        public List<Address> GetAddress(int AddressID)
+    public List<Address> GetAddress(int AddressID)
         {
             //get Address Objects
             List<Address> colAddress = new List<Address>();
 
             //Build Sql Connection
             SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=FinalProject;Trusted_Connection=True;";
+            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
 
             //Sql Commmand
             SqlCommand cmd = conn.CreateCommand();
@@ -120,14 +122,14 @@ namespace FinalProject.Data
         }
 
 
-        public List<CustomerAddress> GetCustomerAddress(int CustomerID)
+    public List<CustomerAddress> GetCustomerAddress(int CustomerID)
         {
             //get CustomerAddress Objects
             List<CustomerAddress> colCustomerAddress = new List<CustomerAddress>();
 
             //Build Sql Connection
             SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=FinalProject;Trusted_Connection=True;";
+            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
 
             //Sql Commmand
             SqlCommand cmd = conn.CreateCommand();
@@ -163,5 +165,13 @@ namespace FinalProject.Data
             return colCustomerAddress;
 
         }
+        
+
+    public List<Customer> GetCustomers()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
+
 }
