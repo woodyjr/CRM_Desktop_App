@@ -2,6 +2,7 @@
 using FinalProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -104,10 +105,10 @@ namespace FinalProject.Data
                         AddressLine2 = (string)reader["AddressLine2"],
                         City = (string)reader["City"],
                         StateProvince = (string)reader["StateProvince"],
-                        CountryRegion = (string)reader["CustomerID"],
-                        PostalCode = (float)reader["CustomerID"],
-                        rowguid = (Guid)reader["CustomerID"],
-                        ModifiedDate = (DateTime)reader["CustomerID"]
+                        CountryRegion = (string)reader["CountryRegion"],
+                        PostalCode = (float)reader["PostalCode"],
+                        rowguid = (Guid)reader["rowguid"],
+                        ModifiedDate = (DateTime)reader["ModifiedDate"]
                     };
                     colAddress.Add(AddressObj);
                 };
@@ -178,7 +179,89 @@ namespace FinalProject.Data
 
         public Customer GetCustomers(int Id)
         {
-            throw new NotImplementedException();
+            //variables
+            Customer custToReturn = null;
+
+            //Getting Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"SELECT * FROM SalesLT.Customer 
+                                WHERE CustomerID = @Id
+                            ";
+            cmd.Parameters.AddWithValue("@Id", Id);
+
+            //DataReader (also data adaptor)
+            try
+            {
+                //open the connections
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                //Loop through rows - create product objects
+                if (reader.Read())
+                {
+                    custToReturn = new Customer
+                    {
+                        CustomerID = (int)reader["CustomerID"],
+                        FirstName = (string)reader["FirstName"],
+                        LastName = (string)reader["LastName"],
+                        PasswordHash = (string)reader["PasswordHash"],
+                        PasswordSalt = (string)reader["PasswordSalt"],
+                        rowguid = (Guid)reader["rowguid"],
+                        ModifiedDate = (DateTime)reader["ModifiedDate"]
+                    };
+                    if (!(reader["MiddleName"] is System.DBNull))
+                    {
+                        custToReturn.MiddleName = (string)reader["MiddleName"];
+                    }
+                    if (!(reader["Title"] is System.DBNull))
+                    {
+                        custToReturn.Title = (string)reader["Title"];
+                    }
+                    if (!(reader["Suffix"] is System.DBNull))
+                    {
+                        custToReturn.Suffix = (string)reader["Suffix"];
+                    }
+                    if (!(reader["CompanyName"] is System.DBNull))
+                    {
+                        custToReturn.CompanyName = (string)reader["CompanyName"];
+                    }
+                    if (!(reader["SalesPerson"] is System.DBNull))
+                    {
+                        custToReturn.SalesPerson = (string)reader["SalesPerson"];
+                    }
+                    if (!(reader["EmailAddress"] is System.DBNull))
+                    {
+                        custToReturn.EmailAddress = (string)reader["EmailAddress"];
+                    }
+                    if (!(reader["Phone"] is System.DBNull))
+                    {
+                        custToReturn.Phone = (string)reader["Phone"];
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            //return collection of products
+            return custToReturn;
+        }
+
+        private SqlCommand GetDbCommand()
+        {
+            //Connection
+            SqlConnection conn = new SqlConnection();
+            //Define connection string
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["DbCustomerUtility"].ConnectionString;
+
+            //Command
+            SqlCommand cmd = conn.CreateCommand();
+
+            return cmd;
         }
     }
 

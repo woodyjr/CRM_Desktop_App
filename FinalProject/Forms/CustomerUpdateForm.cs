@@ -16,14 +16,13 @@ namespace FinalProject.Forms
     {
         private int id;
 
-        public CustomerUpdateForm()
+        public CustomerUpdateForm() 
         {
             InitializeComponent();
         }
 
-        public CustomerUpdateForm(int id) 
+        public CustomerUpdateForm(int id) : this()
         {
-            InitializeComponent();
             this.id = id;
         }
 
@@ -33,8 +32,8 @@ namespace FinalProject.Forms
             Customer customer;
 
             //Load Customer
-            ICustomerUtility custUtil = DependencyInjectorUtility.GetCustomerUtility();
-            customer = custUtil.GetCustomers(id);
+            ICustomerUtility customerUtil = DependencyInjectorUtility.GetCustomerUtility();
+            customer = customerUtil.GetCustomers(id);
 
             //Populate the form
             txtFName.Text = customer.FirstName;

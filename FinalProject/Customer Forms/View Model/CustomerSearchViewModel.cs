@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace FinalProject
 {
-    class CustomerSearchViewModels
+    class CustomerSearchViewModel
     {
-        public CustomerSearchViewModels(Customer cust)
+        public CustomerSearchViewModel(Customer cust)
         {
-            Id = cust.Id;
             CustomerID = cust.CustomerID;
             NameStyle = cust.NameStyle;
             Title = cust.Title;
@@ -30,7 +29,6 @@ namespace FinalProject
             ModifiedDate = cust.ModifiedDate;
 
         }
-        public int Id { get; set; }
         public int CustomerID { get; set; }
         public Boolean NameStyle { get; set; }
         public string Title { get; set; }

@@ -8,7 +8,6 @@ namespace FinalProject.Models
 {
     public class Customer
     {
-
         public int CustomerID { get; set; }
         public Boolean NameStyle { get; set; }
         public string Title { get; set; }
@@ -24,6 +23,6 @@ namespace FinalProject.Models
         public string PasswordSalt { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int Id { get; internal set; }
+        
     }
 }

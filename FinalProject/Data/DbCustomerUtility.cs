@@ -318,9 +318,143 @@ namespace FinalProject.Data
             };
         }
 
-        public Customer GetCustomers(int id)
+        //public Customer GetCustomers(int CustomerID)
+        //{
+        //    //variables
+        //    Customer custToReturn = null;
+
+        //    //Getting Command
+        //    SqlCommand cmd = GetDbCommand();
+
+        //    //Set up select statement
+        //    cmd.CommandText = @"SELECT * 
+        //                        FROM SalesLT.Customer 
+        //                        WHERE 
+        //                            CustomerID = @Id
+        //                        ";
+        //    cmd.Parameters.AddWithValue("@Id", CustomerID);
+
+        //    //DataReader (also data adaptor)
+        //    try
+        //    {
+        //        //open the connections
+        //        cmd.Connection.Open();
+        //        SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+        //        //Loop through rows - create product objects
+        //        if (reader.Read())
+        //        {
+        //            custToReturn = new Customer
+        //            {
+        //                Id = (int)reader["Id"],
+        //                FirstName = (string)reader["FirstName"],
+        //                LastName = (string)reader["LastName"],
+        //            };
+
+        //            if (!(reader["MiddleName"] is System.DBNull))
+        //            {
+        //                custToReturn.MiddleName = (string)reader["MiddleName"];
+        //            }
+        //            if (!(reader["CompanyName"] is System.DBNull))
+        //            {
+        //                custToReturn.CompanyName = (string)reader["CompanyName"];
+        //            }
+        //            if (!(reader["SalesPerson"] is System.DBNull))
+        //            {
+        //                custToReturn.SalesPerson = (string)reader["SalesPerson"];
+        //            }
+        //            if (!(reader["EmailAddress"] is System.DBNull))
+        //            {
+        //                custToReturn.EmailAddress = (string)reader["EmailAddress"];
+        //            }
+        //            if (!(reader["Phone"] is System.DBNull))
+        //            {
+        //                custToReturn.Phone = (string)reader["Phone"];
+        //            }
+        //        }
+        //        reader.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+
+        //    //return collection of products
+        //    return custToReturn;
+        //}
+
+        public Customer GetCustomers(int customerId)
         {
-            throw new NotImplementedException();
+            //variables
+            Customer custToReturn = null;
+
+            //Getting Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"SELECT * FROM SalesLT.Customer 
+                                WHERE CustomerID = @Id
+                            ";
+            cmd.Parameters.AddWithValue("@Id", customerId);
+
+            //DataReader (also data adaptor)
+            try
+            {
+                //open the connections
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                //Loop through rows - create product objects
+                if (reader.Read())
+                {
+                    custToReturn = new Customer
+                    {
+                        CustomerID = (int)reader["CustomerID"],
+                        FirstName = (string)reader["FirstName"],
+                        LastName = (string)reader["LastName"],
+                        PasswordHash = (string)reader["PasswordHash"],
+                        PasswordSalt = (string)reader["PasswordSalt"],
+                        rowguid = (Guid)reader["rowguid"],
+                        ModifiedDate = (DateTime)reader["ModifiedDate"]
+                    };
+                    if (!(reader["MiddleName"] is System.DBNull))
+                    {
+                        custToReturn.MiddleName = (string)reader["MiddleName"];
+                    }
+                    if (!(reader["Title"] is System.DBNull))
+                    {
+                        custToReturn.Title = (string)reader["Title"];
+                    }
+                    if (!(reader["Suffix"] is System.DBNull))
+                    {
+                        custToReturn.Suffix = (string)reader["Suffix"];
+                    }
+                    if (!(reader["CompanyName"] is System.DBNull))
+                    {
+                        custToReturn.CompanyName = (string)reader["CompanyName"];
+                    }
+                    if (!(reader["SalesPerson"] is System.DBNull))
+                    {
+                        custToReturn.SalesPerson = (string)reader["SalesPerson"];
+                    }
+                    if (!(reader["EmailAddress"] is System.DBNull))
+                    {
+                        custToReturn.EmailAddress = (string)reader["EmailAddress"];
+                    }
+                    if (!(reader["Phone"] is System.DBNull))
+                    {
+                        custToReturn.Phone = (string)reader["Phone"];
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            //return collection of products
+            return custToReturn;
         }
     }
 }

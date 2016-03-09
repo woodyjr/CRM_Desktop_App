@@ -13,7 +13,7 @@ using FinalProject.Forms;
 
 namespace FinalProject
 {
-   
+
     public partial class CustomersSearchForm : Form
     {
         public CustomersSearchForm()
@@ -30,11 +30,11 @@ namespace FinalProject
             //good search
             List<Customer> searchResults = custUtil.CustomerSearch(txtCustomersSearch.Text);
 
-            List<CustomerSearchViewModels> csVMCollection = new List<CustomerSearchViewModels>();
+            List<CustomerSearchViewModel> csVMCollection = new List<CustomerSearchViewModel>();
             foreach (Customer customerDTO in searchResults)
             {
                 //create new view model object
-                CustomerSearchViewModels csVM = new CustomerSearchViewModels(customerDTO);
+                CustomerSearchViewModel csVM = new CustomerSearchViewModel(customerDTO);
 
                 //add to csVMVollection collection
                 csVMCollection.Add(csVM);
@@ -44,12 +44,12 @@ namespace FinalProject
             dgvCustomers.DataSource = null;
             dgvCustomers.DataSource = csVMCollection;
 
-            
+
         }
 
         private void dgvCustomers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+
         }
 
         private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -59,15 +59,15 @@ namespace FinalProject
 
         private void dgvCustomers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
             //Variables
-            CustomerSearchViewModels customerVM = null;
+            CustomerSearchViewModel customerVM = null;
             if (dgvCustomers.SelectedRows.Count > 0)
             {
-                customerVM = (CustomerSearchViewModels)dgvCustomers.SelectedRows[0].DataBoundItem;
+                customerVM = (CustomerSearchViewModel)dgvCustomers.SelectedRows[0].DataBoundItem;
             }
 
-            CustomerUpdateForm custUpdateForm = new CustomerUpdateForm(customerVM.Id);
+            CustomerUpdateForm custUpdateForm = new CustomerUpdateForm(customerVM.CustomerID);
             custUpdateForm.ShowDialog();
         }
     }
