@@ -171,11 +171,15 @@ namespace FinalProject.Data
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetCustomers()
+        public List<CustomerInformation> GetCustomerInformation(string query)
         {
             throw new NotImplementedException();
         }
-        
+
+        public Customer GetCustomers(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

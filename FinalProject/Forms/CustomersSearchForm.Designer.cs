@@ -74,6 +74,9 @@
             this.dgvCustomers.ReadOnly = true;
             this.dgvCustomers.Size = new System.Drawing.Size(456, 213);
             this.dgvCustomers.TabIndex = 3;
+            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
+            this.dgvCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentDoubleClick);
+            this.dgvCustomers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellDoubleClick);
             // 
             // CustomersSearchForm
             // 

@@ -24,8 +24,6 @@ namespace FinalProject.Models
         public string PasswordSalt { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
-
-
-
+        public int Id { get; internal set; }
     }
 }

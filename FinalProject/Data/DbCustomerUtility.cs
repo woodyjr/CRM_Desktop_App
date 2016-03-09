@@ -21,7 +21,8 @@ namespace FinalProject.Data
 
             //Set up select statement
             cmd.CommandText = @"SELECT * 
-                    FROM SalesLT.Customer
+                    FROM 
+                        SalesLT.Customer 
                     WHERE 
                         FirstName LIKE '%' + @query + '%' OR
                         CustomerID LIKE '%' + @query + '%' OR
@@ -94,17 +95,23 @@ namespace FinalProject.Data
             return colCustomers;
         }
 
-        public List<CustomerInformation> GetCustomerInformation()
+        public List<CustomerInformation> GetCustomerInformation(string query)
         {
             SqlCommand cmd = GetDbCommand();
             //set up select statement 
             cmd.CommandText = @"SELECT * 
-                                FROM SalesLT.Customer LEFT JOIN 
-                                SalesLT.CustomerAddress ON 
-                                SalesLT.CustomerAddress.CustomerID = Customer.CustomerID 
-                                LEFT JOIN SalesLT.Address ON 
-                                SalesLT.Address.AddressID = SalesLT.Address.AddressID
+                                FROM 
+                                    SalesLT.Customer LEFT JOIN 
+                                    SalesLT.CustomerAddress ON 
+                                    SalesLT.CustomerAddress.CustomerID = Customer.CustomerID 
+                                    LEFT JOIN SalesLT.Address ON 
+                                    SalesLT.Address.AddressID = SalesLT.Address.AddressID
+                                WHERE 
+                                    FirstName LIKE '%' + @query + '%' OR
+                                    CustomerID LIKE '%' + @query + '%' OR
+                                    LastName LIKE '%' + @query + '%'
                             ";
+            cmd.Parameters.AddWithValue("@query", query);
 
             //DataReader
             List<CustomerInformation> colCustomerInformation = new List<CustomerInformation>();
@@ -184,7 +191,6 @@ namespace FinalProject.Data
 
         }
     
-
         public List<Address> GetAddress(int AddressID)
         {
             //get Address Objects
@@ -276,11 +282,6 @@ namespace FinalProject.Data
 
         }
 
-        public List<Customer> GetCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
         private SqlCommand GetDbCommand()
         {
             //Connection
@@ -317,6 +318,9 @@ namespace FinalProject.Data
             };
         }
 
-        
+        public Customer GetCustomers(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

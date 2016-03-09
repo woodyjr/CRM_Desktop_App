@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FinalProject.Forms;
 
 namespace FinalProject
 {
@@ -44,6 +45,30 @@ namespace FinalProject
             dgvCustomers.DataSource = csVMCollection;
 
             
+        }
+
+        private void dgvCustomers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+          
+        }
+
+        private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvCustomers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+            //Variables
+            CustomerSearchViewModels customerVM = null;
+            if (dgvCustomers.SelectedRows.Count > 0)
+            {
+                customerVM = (CustomerSearchViewModels)dgvCustomers.SelectedRows[0].DataBoundItem;
+            }
+
+            CustomerUpdateForm custUpdateForm = new CustomerUpdateForm(customerVM.Id);
+            custUpdateForm.ShowDialog();
         }
     }
 }

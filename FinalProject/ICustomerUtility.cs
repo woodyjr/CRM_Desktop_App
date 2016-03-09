@@ -6,12 +6,11 @@ namespace FinalProject.Data
 {
     public interface ICustomerUtility
     {
-     //   Customer GetCustomer(int query);
         List<Customer> CustomerSearch(string query);
         List<Address> GetAddress(int AddressID);
         List<CustomerAddress> GetCustomerAddress(int CustomerID);
-        List<Customer> GetCustomers();
-        List<CustomerInformation> GetCustomerInformation();
+        List<CustomerInformation> GetCustomerInformation(string query);
+        Customer GetCustomers(int id);
 
     }
 }
