@@ -456,5 +456,48 @@ namespace FinalProject.Data
             //return collection of products
             return custToReturn;
         }
+
+        public void UpdateCustomer(Customer custToUpdate)
+        {
+            //Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"
+            UPDATE SalesLT.Customer
+            SET FirstName = @FirstName,
+                MiddleName = @MiddleName,
+                LastName = @LastName,
+                EmailAddress = @EmailAddress,
+                CompanyName = @CompanyName,
+                SalesPerson = @SalesPerson,
+                Phone = @Phone,
+                Suffix = @Suffix
+            WHERE CustomerID = @CustomerID
+        ";
+
+            //set our database Query Parameters
+            cmd.Parameters.AddWithValue("@FirstName", custToUpdate.FirstName);
+            cmd.Parameters.AddWithValue("@MiddleName", custToUpdate.MiddleName);
+            cmd.Parameters.AddWithValue("@LastName", custToUpdate.LastName);
+            cmd.Parameters.AddWithValue("@EmailAddress", custToUpdate.EmailAddress);
+            cmd.Parameters.AddWithValue("@CompanyName", custToUpdate.CompanyName);
+            cmd.Parameters.AddWithValue("@SalesPerson", custToUpdate.SalesPerson);
+            cmd.Parameters.AddWithValue("@Phone", custToUpdate.Phone);
+            cmd.Parameters.AddWithValue("@Suffix", custToUpdate.Suffix);
+            cmd.Parameters.AddWithValue("@CustomerID", custToUpdate.CustomerID);
+
+            //Execute Query
+            try
+            {
+                cmd.Connection.Open(); //Open DB Connection
+                cmd.ExecuteNonQuery(); //Execute Query
+                cmd.Connection.Close(); //Close DB Connection
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

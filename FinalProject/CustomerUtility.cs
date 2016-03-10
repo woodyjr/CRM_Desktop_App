@@ -167,91 +167,137 @@ namespace FinalProject.Data
 
         }
 
-        public List<CustomerInformation> GetCustomerInformation()
+    public List<CustomerInformation> GetCustomerInformation()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<CustomerInformation> GetCustomerInformation(string query)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Customer GetCustomers(int Id)
+    {
+        //variables
+        Customer custToReturn = null;
+
+        //Getting Command
+        SqlCommand cmd = GetDbCommand();
+
+        //Set up select statement
+        cmd.CommandText = @"SELECT * FROM SalesLT.Customer 
+                            WHERE CustomerID = @Id
+                        ";
+        cmd.Parameters.AddWithValue("@Id", Id);
+
+        //DataReader (also data adaptor)
+        try
         {
-            throw new NotImplementedException();
-        }
+            //open the connections
+            cmd.Connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
-        public List<CustomerInformation> GetCustomerInformation(string query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer GetCustomers(int Id)
-        {
-            //variables
-            Customer custToReturn = null;
-
-            //Getting Command
-            SqlCommand cmd = GetDbCommand();
-
-            //Set up select statement
-            cmd.CommandText = @"SELECT * FROM SalesLT.Customer 
-                                WHERE CustomerID = @Id
-                            ";
-            cmd.Parameters.AddWithValue("@Id", Id);
-
-            //DataReader (also data adaptor)
-            try
+            //Loop through rows - create product objects
+            if (reader.Read())
             {
-                //open the connections
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-
-                //Loop through rows - create product objects
-                if (reader.Read())
+                custToReturn = new Customer
                 {
-                    custToReturn = new Customer
-                    {
-                        CustomerID = (int)reader["CustomerID"],
-                        FirstName = (string)reader["FirstName"],
-                        LastName = (string)reader["LastName"],
-                        PasswordHash = (string)reader["PasswordHash"],
-                        PasswordSalt = (string)reader["PasswordSalt"],
-                        rowguid = (Guid)reader["rowguid"],
-                        ModifiedDate = (DateTime)reader["ModifiedDate"]
-                    };
-                    if (!(reader["MiddleName"] is System.DBNull))
-                    {
-                        custToReturn.MiddleName = (string)reader["MiddleName"];
-                    }
-                    if (!(reader["Title"] is System.DBNull))
-                    {
-                        custToReturn.Title = (string)reader["Title"];
-                    }
-                    if (!(reader["Suffix"] is System.DBNull))
-                    {
-                        custToReturn.Suffix = (string)reader["Suffix"];
-                    }
-                    if (!(reader["CompanyName"] is System.DBNull))
-                    {
-                        custToReturn.CompanyName = (string)reader["CompanyName"];
-                    }
-                    if (!(reader["SalesPerson"] is System.DBNull))
-                    {
-                        custToReturn.SalesPerson = (string)reader["SalesPerson"];
-                    }
-                    if (!(reader["EmailAddress"] is System.DBNull))
-                    {
-                        custToReturn.EmailAddress = (string)reader["EmailAddress"];
-                    }
-                    if (!(reader["Phone"] is System.DBNull))
-                    {
-                        custToReturn.Phone = (string)reader["Phone"];
-                    }
+                    CustomerID = (int)reader["CustomerID"],
+                    FirstName = (string)reader["FirstName"],
+                    LastName = (string)reader["LastName"],
+                    PasswordHash = (string)reader["PasswordHash"],
+                    PasswordSalt = (string)reader["PasswordSalt"],
+                    rowguid = (Guid)reader["rowguid"],
+                    ModifiedDate = (DateTime)reader["ModifiedDate"]
+                };
+                if (!(reader["MiddleName"] is System.DBNull))
+                {
+                    custToReturn.MiddleName = (string)reader["MiddleName"];
                 }
-                reader.Close();
+                if (!(reader["Title"] is System.DBNull))
+                {
+                    custToReturn.Title = (string)reader["Title"];
+                }
+                if (!(reader["Suffix"] is System.DBNull))
+                {
+                    custToReturn.Suffix = (string)reader["Suffix"];
+                }
+                if (!(reader["CompanyName"] is System.DBNull))
+                {
+                    custToReturn.CompanyName = (string)reader["CompanyName"];
+                }
+                if (!(reader["SalesPerson"] is System.DBNull))
+                {
+                    custToReturn.SalesPerson = (string)reader["SalesPerson"];
+                }
+                if (!(reader["EmailAddress"] is System.DBNull))
+                {
+                    custToReturn.EmailAddress = (string)reader["EmailAddress"];
+                }
+                if (!(reader["Phone"] is System.DBNull))
+                {
+                    custToReturn.Phone = (string)reader["Phone"];
+                }
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-            //return collection of products
-            return custToReturn;
+            reader.Close();
+        }
+        catch (Exception ex)
+        {
+            throw;
         }
 
-        private SqlCommand GetDbCommand()
+        //return collection of products
+        return custToReturn;
+    }
+
+    public void UpdateCustomer(Customer custToUpdate)
+    {
+
+        //Command
+        SqlCommand cmd = GetDbCommand();
+
+        //Set up select statement
+        cmd.CommandText = @"
+            UPDATE SalesLT.Customer
+            SET FirstName = @FirstName,
+                MiddleName = @MiddleName,
+                LastName = @LastName,
+                EmailAddress = @EmailAddress,
+                CompanyName = @CompanyName,
+                SalesPerson = @SalesPerson,
+                Phone = @Phone,
+                Suffix = @Suffix
+            WHERE CustomerID = @CustomerID
+        ";
+
+        //set our database Query Parameters
+        cmd.Parameters.AddWithValue("@FirstName", custToUpdate.FirstName);
+        cmd.Parameters.AddWithValue("@MiddleName", custToUpdate.MiddleName);
+        cmd.Parameters.AddWithValue("@LastName", custToUpdate.LastName);
+        cmd.Parameters.AddWithValue("@EmailAddress", custToUpdate.EmailAddress);
+        cmd.Parameters.AddWithValue("@CompanyName", custToUpdate.CompanyName);
+        cmd.Parameters.AddWithValue("@SalesPerson", custToUpdate.SalesPerson);
+        cmd.Parameters.AddWithValue("@Phone", custToUpdate.Phone);
+        cmd.Parameters.AddWithValue("@Suffix", custToUpdate.Suffix);
+        cmd.Parameters.AddWithValue("@CustomerID", custToUpdate.CustomerID);
+
+
+            //Execute Query
+            try
+        {
+            cmd.Connection.Open(); //Open DB Connection
+            cmd.ExecuteNonQuery(); //Execute Query
+            cmd.Connection.Close(); //Close DB Connection
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+            
+    }
+
+    private SqlCommand GetDbCommand()
         {
             //Connection
             SqlConnection conn = new SqlConnection();

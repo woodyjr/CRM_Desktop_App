@@ -43,7 +43,50 @@ namespace FinalProject.Forms
             txtCompName.Text = customer.CompanyName;
             txtSalesPerson.Text = customer.SalesPerson;
             txtPhone.Text = customer.Phone;
+            txtSuffix.Text = customer.Suffix;
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            //Customer object
+            //Copy the values from the textbox into the new customer object
+            Customer custToUpdate = new Customer()
+            {
+                FirstName = txtFName.Text,
+                MiddleName = txtMName.Text,
+                LastName = txtLName.Text,
+                EmailAddress = txtEmail.Text,
+                CompanyName = txtCompName.Text,
+                SalesPerson = txtSalesPerson.Text,
+                Phone = txtPhone.Text,
+                Suffix = txtSuffix.Text,
+                CustomerID = this.id
+
+            };
+
+            //IInventoryUtility
+            ICustomerUtility custUtil = DependencyInjectorUtility.GetCustomerUtility();
+
+            //UpdateProduct
+            try
+            {
+                custUtil.UpdateCustomer(custToUpdate);
+            }
+            catch (Exception ex)
+            {
+                //Logging*
+                //Error Handling*
+                MessageBox.Show(ex.Message);
+            }
+            //Close the form
+            this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

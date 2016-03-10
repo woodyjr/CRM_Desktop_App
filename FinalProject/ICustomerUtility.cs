@@ -11,5 +11,6 @@ namespace FinalProject.Data
         List<CustomerAddress> GetCustomerAddress(int CustomerID);
         List<CustomerInformation> GetCustomerInformation(string query);
         Customer GetCustomers(int id);
+        void UpdateCustomer(Customer custToUpdate);
     }
 }

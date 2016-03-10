@@ -66,9 +66,11 @@ namespace FinalProject
             {
                 customerVM = (CustomerSearchViewModel)dgvCustomers.SelectedRows[0].DataBoundItem;
             }
-
+            if (customerVM == null) { return; /*Exit the Function*/}
             CustomerUpdateForm custUpdateForm = new CustomerUpdateForm(customerVM.CustomerID);
             custUpdateForm.ShowDialog();
+
+            btnCustomersSearch_Click(sender, e);
         }
     }
 }

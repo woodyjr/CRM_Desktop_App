@@ -35,7 +35,7 @@
             this.txtCompName = new System.Windows.Forms.TextBox();
             this.txtSalesPerson = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtSuffix = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -96,12 +96,12 @@
             this.txtPhone.Size = new System.Drawing.Size(229, 20);
             this.txtPhone.TabIndex = 6;
             // 
-            // textBox8
+            // txtSuffix
             // 
-            this.textBox8.Location = new System.Drawing.Point(274, 77);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(67, 20);
-            this.textBox8.TabIndex = 7;
+            this.txtSuffix.Location = new System.Drawing.Point(274, 77);
+            this.txtSuffix.Name = "txtSuffix";
+            this.txtSuffix.Size = new System.Drawing.Size(67, 20);
+            this.txtSuffix.TabIndex = 7;
             // 
             // btnSave
             // 
@@ -111,6 +111,7 @@
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label1
             // 
@@ -183,6 +184,7 @@
             this.btnClose.TabIndex = 17;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // CustomerUpdateForm
             // 
@@ -198,7 +200,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txtSuffix);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtSalesPerson);
             this.Controls.Add(this.txtCompName);
@@ -223,7 +225,7 @@
         private System.Windows.Forms.TextBox txtCompName;
         private System.Windows.Forms.TextBox txtSalesPerson;
         private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtSuffix;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
