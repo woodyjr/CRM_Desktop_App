@@ -13,8 +13,12 @@ namespace FinalProject.Data
 {
     public class CustomerUtility : ICustomerUtility
     {
+        public Customer AddCustomerUtility(Customer newCustomer)
+        {
+            throw new NotImplementedException();
+        }
 
-    public List<Customer> CustomerSearch(string query)
+        public List<Customer> CustomerSearch(string query)
         {
             
             //Build Sql Connection

@@ -318,71 +318,6 @@ namespace FinalProject.Data
             };
         }
 
-        //public Customer GetCustomers(int CustomerID)
-        //{
-        //    //variables
-        //    Customer custToReturn = null;
-
-        //    //Getting Command
-        //    SqlCommand cmd = GetDbCommand();
-
-        //    //Set up select statement
-        //    cmd.CommandText = @"SELECT * 
-        //                        FROM SalesLT.Customer 
-        //                        WHERE 
-        //                            CustomerID = @Id
-        //                        ";
-        //    cmd.Parameters.AddWithValue("@Id", CustomerID);
-
-        //    //DataReader (also data adaptor)
-        //    try
-        //    {
-        //        //open the connections
-        //        cmd.Connection.Open();
-        //        SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-
-        //        //Loop through rows - create product objects
-        //        if (reader.Read())
-        //        {
-        //            custToReturn = new Customer
-        //            {
-        //                Id = (int)reader["Id"],
-        //                FirstName = (string)reader["FirstName"],
-        //                LastName = (string)reader["LastName"],
-        //            };
-
-        //            if (!(reader["MiddleName"] is System.DBNull))
-        //            {
-        //                custToReturn.MiddleName = (string)reader["MiddleName"];
-        //            }
-        //            if (!(reader["CompanyName"] is System.DBNull))
-        //            {
-        //                custToReturn.CompanyName = (string)reader["CompanyName"];
-        //            }
-        //            if (!(reader["SalesPerson"] is System.DBNull))
-        //            {
-        //                custToReturn.SalesPerson = (string)reader["SalesPerson"];
-        //            }
-        //            if (!(reader["EmailAddress"] is System.DBNull))
-        //            {
-        //                custToReturn.EmailAddress = (string)reader["EmailAddress"];
-        //            }
-        //            if (!(reader["Phone"] is System.DBNull))
-        //            {
-        //                custToReturn.Phone = (string)reader["Phone"];
-        //            }
-        //        }
-        //        reader.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-
-        //    //return collection of products
-        //    return custToReturn;
-        //}
-
         public Customer GetCustomers(int customerId)
         {
             //variables
@@ -404,7 +339,7 @@ namespace FinalProject.Data
                 cmd.Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
-                //Loop through rows - create product objects
+                //Loop through rows - create customer objects
                 if (reader.Read())
                 {
                     custToReturn = new Customer
@@ -453,7 +388,7 @@ namespace FinalProject.Data
                 throw;
             }
 
-            //return collection of products
+            //return collection of customers
             return custToReturn;
         }
 
@@ -498,6 +433,60 @@ namespace FinalProject.Data
             {
                 throw;
             }
+        }
+
+        public Customer AddCustomerUtility(Customer newCustomer)
+        {
+            //Variables
+            Customer customerToReturn = null;
+
+            //Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"
+                INSERT INTO SalesLT.Customer
+                (FirstName, MiddleName, LastName, EmailAddress, CompanyName, SalesPerson, Phone, Suffix, CustomerID)
+                VALUES
+                (@FirstName, @MiddleName, @LastName, @EmailAddress, @CompanyName, @SalesPerson, @Phone, @Suffix, @CustomerID);
+
+                SELECT * from SalesLT.Customer WHERE CustomerID = @@Identity;
+             ";
+
+            //set our database Query Parameters
+            cmd.Parameters.AddWithValue("@FirstName", newCustomer.FirstName);
+            cmd.Parameters.AddWithValue("@MiddleName", newCustomer.MiddleName);
+            cmd.Parameters.AddWithValue("@LastName", newCustomer.LastName);
+            cmd.Parameters.AddWithValue("@EmailAddress", newCustomer.EmailAddress);
+            cmd.Parameters.AddWithValue("@CompanyName", newCustomer.CompanyName);
+            cmd.Parameters.AddWithValue("@SalesPerson", newCustomer.SalesPerson);
+            cmd.Parameters.AddWithValue("@Phone", newCustomer.Phone);
+            cmd.Parameters.AddWithValue("@Suffix", newCustomer.Suffix);
+            cmd.Parameters.AddWithValue("@CustomerID", newCustomer.CustomerID);
+
+            //Execute Query
+            SqlDataReader reader;
+            try
+            {
+                cmd.Connection.Open();
+                reader = cmd.ExecuteReader();
+
+                //Building a new Product Object
+                if (reader.Read())
+                {
+                    customerToReturn = BuildProduct(reader);
+                }
+
+                cmd.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
+
+            //Return new Object
+            return customerToReturn;
         }
     }
 }

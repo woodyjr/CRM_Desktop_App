@@ -49,11 +49,11 @@
   <ItemGroup>
     <Compile Include="Customer Forms\View Model\CustomerInformationViewModel.cs" />
     <Compile Include="Customer Forms\View Model\CustomerSearchViewModel.cs" />
-    <Compile Include="Forms\CustomerInformationForm.cs">
+    <Compile Include="Forms\CustomerAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerInformationForm.Designer.cs">
-      <DependentUpon>CustomerInformationForm.cs</DependentUpon>
+    <Compile Include="Forms\CustomerAddForm.Designer.cs">
+      <DependentUpon>CustomerAddForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CustomersSearchForm.cs">
       <SubType>Form</SubType>
@@ -86,8 +86,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\CustomerInformationForm.resx">
-      <DependentUpon>CustomerInformationForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CustomerAddForm.resx">
+      <DependentUpon>CustomerAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomersSearchForm.resx">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>

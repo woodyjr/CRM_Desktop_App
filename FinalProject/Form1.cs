@@ -20,16 +20,22 @@ namespace FinalProject
             InitializeComponent();
         }
 
+        //Tool strip name are not correct
         private void customerInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomersSearchForm custSearchForm = new CustomersSearchForm();
             custSearchForm.ShowDialog();
         }
 
-        private void searchForCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            CustomerInformationForm custInfoForm = new CustomerInformationForm();
-            custInfoForm.ShowDialog();
+
+        }
+
+        private void addCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CustomerAddForm custAddForm = new CustomerAddForm();
+            custAddForm.ShowDialog();
         }
     }
 }

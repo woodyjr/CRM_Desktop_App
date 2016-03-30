@@ -12,5 +12,6 @@ namespace FinalProject.Data
         List<CustomerInformation> GetCustomerInformation(string query);
         Customer GetCustomers(int id);
         void UpdateCustomer(Customer custToUpdate);
+        Customer AddCustomerUtility(Customer newCustomer);
     }
 }

@@ -30,7 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.customerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchForCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customerInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,23 +52,23 @@
             // customerToolStripMenuItem
             // 
             this.customerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchForCustomerToolStripMenuItem,
+            this.addCustomerToolStripMenuItem,
             this.customerInformationToolStripMenuItem});
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
             this.customerToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.customerToolStripMenuItem.Text = "&Customer";
             // 
-            // searchForCustomerToolStripMenuItem
+            // addCustomerToolStripMenuItem
             // 
-            this.searchForCustomerToolStripMenuItem.Name = "searchForCustomerToolStripMenuItem";
-            this.searchForCustomerToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.searchForCustomerToolStripMenuItem.Text = "Customer &Information";
-            this.searchForCustomerToolStripMenuItem.Click += new System.EventHandler(this.searchForCustomerToolStripMenuItem_Click);
+            this.addCustomerToolStripMenuItem.Name = "addCustomerToolStripMenuItem";
+            this.addCustomerToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.addCustomerToolStripMenuItem.Text = "Add Customer";
+            this.addCustomerToolStripMenuItem.Click += new System.EventHandler(this.addCustomerToolStripMenuItem_Click);
             // 
             // customerInformationToolStripMenuItem
             // 
             this.customerInformationToolStripMenuItem.Name = "customerInformationToolStripMenuItem";
-            this.customerInformationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customerInformationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.customerInformationToolStripMenuItem.Text = "&Search for Customer";
             this.customerInformationToolStripMenuItem.Click += new System.EventHandler(this.customerInformationToolStripMenuItem_Click);
             // 
@@ -93,6 +93,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -104,7 +105,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem customerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchForCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customerInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderToolStripMenuItem1;
