@@ -26,14 +26,7 @@ namespace FinalProject.Forms
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            //Validate Customer ID as Number
-            int newCustID; //new Customer ID
-
-            if (!int.TryParse(txtCustomerID.Text, out newCustID))
-            {
-                MessageBox.Show("ID must be a valid number.");
-                return; //Exit the event handler
-            }
+            
 
             //Customer object
             Customer custToAdd = new Customer()
@@ -46,7 +39,8 @@ namespace FinalProject.Forms
                 SalesPerson = txtSalesPerson.Text,
                 Phone = txtPhone.Text,
                 Suffix = txtSuffix.Text,
-                CustomerID = newCustID
+                PasswordHash = txtPassHash.Text,
+                PasswordSalt = txtPassSalt.Text
 
             };
 

@@ -446,9 +446,9 @@ namespace FinalProject.Data
             //Set up select statement
             cmd.CommandText = @"
                 INSERT INTO SalesLT.Customer
-                (FirstName, MiddleName, LastName, EmailAddress, CompanyName, SalesPerson, Phone, Suffix, CustomerID)
+                (FirstName, MiddleName, LastName, EmailAddress, CompanyName, SalesPerson, Phone, Suffix, PasswordHash, PasswordSalt)
                 VALUES
-                (@FirstName, @MiddleName, @LastName, @EmailAddress, @CompanyName, @SalesPerson, @Phone, @Suffix, @CustomerID);
+                (@FirstName, @MiddleName, @LastName, @EmailAddress, @CompanyName, @SalesPerson, @Phone, @Suffix, @PasswordHash, @PasswordSalt);
 
                 SELECT * from SalesLT.Customer WHERE CustomerID = @@Identity;
              ";
@@ -462,7 +462,8 @@ namespace FinalProject.Data
             cmd.Parameters.AddWithValue("@SalesPerson", newCustomer.SalesPerson);
             cmd.Parameters.AddWithValue("@Phone", newCustomer.Phone);
             cmd.Parameters.AddWithValue("@Suffix", newCustomer.Suffix);
-            cmd.Parameters.AddWithValue("@CustomerID", newCustomer.CustomerID);
+            cmd.Parameters.AddWithValue("@PasswordHash", newCustomer.PasswordHash);
+            cmd.Parameters.AddWithValue("@PasswordSalt", newCustomer.PasswordSalt);
 
             //Execute Query
             SqlDataReader reader;
