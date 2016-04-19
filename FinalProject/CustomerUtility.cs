@@ -76,56 +76,58 @@ namespace FinalProject.Data
             //return collection of customers
             return customerObj;
         }
-    public Address GetAddress(int addressID)
+    public FullAddress GetFullAddress(int fullAddress)
+    {
+        //variables
+        FullAddress fulladdress = new FullAddress();
+
+        //connection
+        SqlCommand cmd = GetDbCommand();
+
+        //Setup Select Statement 
+        cmd.CommandText = @"
+                    SELECT *
+                    FROM [AdventureWorksLT2012].[SalesLT].[Address] JOIN [AdventureWorksLT2012].[SalesLT].[CustomerAddress]
+                    ON [Address].[AddressID] = [CustomerAddress].AddressID 
+                    WHERE AddressID = @AddressID 
+                    ";
+        //query variables
+        cmd.Parameters.AddWithValue("@AddressID", fullAddress);
+
+        //DataReader 
+        try
         {
-            //variables
-            Address address = new Address();
+            //open Database Connection
+            cmd.Connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
-            //connection
-            SqlCommand cmd = GetDbCommand();
-
-            //Setup Select Statement 
-            cmd.CommandText = @"
-                SELECT * FROM SalesLT.Address
-                WHERE AddressID = @AddressID    
-            ";
-            //query variables
-            cmd.Parameters.AddWithValue("@AddressID", addressID);
-
-            //DataReader 
-            try
+            //loop through rows - create
+            while (reader.Read())
             {
-                //open Database Connection
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                FullAddress newAddress = new FullAddress();
 
-                //loop through rows - create
-                while (reader.Read())
-                {
-                    Address newAddress = new Address();
+                newAddress.AddressID = (int)reader["AddressID"];
+                newAddress.AddressLine1 = (string)reader["AddressLine1"];
+                if (!reader.IsDBNull(reader.GetOrdinal("AddressLine2")))
+                    newAddress.AddressLine2 = (string)reader["AddressLine2"];
+                newAddress.City = (string)reader["City"];
+                newAddress.StateProvince = (string)reader["StateProvince"];
+                newAddress.CountryRegion = (string)reader["CountryRegion"];
+                newAddress.PostalCode = (string)reader["PostalCode"];
+                newAddress.rowguid = (Guid)reader["rowguid"];
+                newAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
 
-                    newAddress.AddressID = (int)reader["AddressID"];
-                    newAddress.AddressLine1 = (string)reader["AddressLine1"];
-                    if (!reader.IsDBNull(reader.GetOrdinal("AddressLine2")))
-                        newAddress.AddressLine2 = (string)reader["AddressLine2"];
-                    newAddress.City = (string)reader["City"];
-                    newAddress.StateProvince = (string)reader["StateProvince"];
-                    newAddress.CountryRegion = (string)reader["CountryRegion"];
-                    newAddress.PostalCode = (string)reader["PostalCode"];
-                    newAddress.rowguid = (Guid)reader["rowguid"];
-                    newAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
-
-                    address = newAddress;
-                }
-                //close the data connection
-                reader.Close();
+                fulladdress = newAddress;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            //return collection of Addresses
-            return address;
+            //close the data connection
+            reader.Close();
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+        //return collection of Addresses
+        return fulladdress;
         }
     public List<CustomerAddress> GetCustomerAddress(int CustomerID)
         {
@@ -175,50 +177,6 @@ namespace FinalProject.Data
             //Return collection of customer address objects
             return customeraddresses;
 
-        }
-    public CustomerAddress GetOneCustomerAddress(int AddressID, int CustomerID)
-        {
-            //variables
-            CustomerAddress customerAddress = new CustomerAddress();
-
-            //connection
-            SqlCommand cmd = GetDbCommand();
-
-            //Setup Select Statement 
-            cmd.CommandText = @"
-                SELECT * FROM SalesLT.CustomerAddress
-                WHERE CustomerID = @customerID
-                AND AddressID = @addressID
-             ";
-            //set our database query parameters
-            cmd.Parameters.AddWithValue("@customerID", CustomerID);
-            cmd.Parameters.AddWithValue("@addressID", AddressID);
-
-            //DataReader 
-            try
-            {
-                //open Database Connection
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-
-                //loop through rows - create
-                if (reader.Read())
-                {
-                    customerAddress.CustomerID = (int)reader["CustomerID"];
-                    customerAddress.AddressID = (int)reader["AddressID"];
-                    customerAddress.AddressType = (string)reader["AddressType"];
-                    customerAddress.rowguid = (Guid)reader["rowguid"];
-                    customerAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
-                }
-                //close the data connection
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            //return collection of Addresses
-            return customerAddress;
         }
     public List<CustomerInformation> GetCustomerInformation()
     {

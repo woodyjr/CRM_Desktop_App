@@ -191,21 +191,23 @@ namespace FinalProject.Data
 
         }
     
-        public Address GetAddress(int addressID)
+        public FullAddress GetFullAddress(int fullAddress)
         {
             //variables
-            Address address = new Address();
+            FullAddress fulladdress = new FullAddress();
 
             //connection
             SqlCommand cmd = GetDbCommand();
 
             //Setup Select Statement 
             cmd.CommandText = @"
-                SELECT * FROM SalesLT.Address
-                WHERE AddressID = @AddressID    
-            ";
+                    SELECT *
+                    FROM [AdventureWorksLT2012].[SalesLT].[Address] JOIN [AdventureWorksLT2012].[SalesLT].[CustomerAddress]
+                    ON [Address].[AddressID] = [CustomerAddress].AddressID 
+                    WHERE CustomerID = @Id 
+                    ";
             //query variables
-            cmd.Parameters.AddWithValue("@AddressID", addressID);
+            cmd.Parameters.AddWithValue("@Id", fullAddress);
 
             //DataReader 
             try
@@ -217,9 +219,9 @@ namespace FinalProject.Data
                 //loop through rows - create
                 while (reader.Read())
                 {
-                    Address newAddress = new Address();
+                    FullAddress newAddress = new FullAddress();
 
-                    newAddress.AddressID = (int)reader["AddressID"];
+                    newAddress.AddressType = (string)reader["AddressType"];
                     newAddress.AddressLine1 = (string)reader["AddressLine1"];
                     if (!reader.IsDBNull(reader.GetOrdinal("AddressLine2")))
                         newAddress.AddressLine2 = (string)reader["AddressLine2"];
@@ -227,10 +229,8 @@ namespace FinalProject.Data
                     newAddress.StateProvince = (string)reader["StateProvince"];
                     newAddress.CountryRegion = (string)reader["CountryRegion"];
                     newAddress.PostalCode = (string)reader["PostalCode"];
-                    newAddress.rowguid = (Guid)reader["rowguid"];
-                    newAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
 
-                    address = newAddress;
+                    fulladdress = newAddress;
                 }
                 //close the data connection
                 reader.Close();
@@ -240,60 +240,9 @@ namespace FinalProject.Data
                 throw;
             }
             //return collection of Addresses
-            return address;
+            return fulladdress;
         }
-
-        //public List<Address> GetAddressList(int addressID)
-        //{
-        //    //Variables
-        //    List<Address> addressList = new List<Address>();
-        //    //connection
-        //    SqlConnection conn = new SqlConnection();
-        //    //Define connection string
-        //    conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
-
-        //    //Command
-        //    SqlCommand cmd = conn.CreateCommand();
-
-        //    //Setup our SELECT statement. (SQL statement)
-        //    cmd.CommandText = "SELECT * FROM SalesLT.Address WHERE AddressID = @Id";
-
-        //    //DataReader (also a DataAdapter)
-        //    try
-        //    {
-        //        //open database connection
-        //        conn.Open();
-        //        SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-        //        //Loop through rows - create Product objects
-        //        while (reader.Read())
-        //        {
-        //            Address newA = new Address
-        //            {
-        //                AddressLine1 = (string)reader["AddressLine1"],
-        //                AddressLine2 = (string)reader["AddressLine2"],
-        //                City = (string)reader["City"],
-        //                StateProvince = (string)reader["StateProvince"],
-        //                CountryRegion = (string)reader["CountryRegion"],
-        //                PostalCode = (string)reader["PostalCode"],
-        //                AddressID = (int)reader["AddressID"]
-        //            };
-
-
-        //            addressList.Add(newA);
-
-        //        }
-        //        //Closes the Database Connection l
-        //        reader.Close();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-
-        //    //Return collection of products
-        //    return addressList;
-        //}
+        
         public List<CustomerAddress> GetCustomerAddress(int CustomerID)
         {
             //Variables
@@ -550,10 +499,6 @@ namespace FinalProject.Data
             //Return new Object
             return customerToReturn;
         }
-
-        public CustomerAddress GetOneCustomerAddress(int AddressID, int CustomerID)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

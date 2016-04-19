@@ -29,7 +29,7 @@ namespace FinalProject.Forms
         {
             //Variables
             Customer customer;
-            Address address;
+            FullAddress fulladdress;
 
             //Load Customer
             ICustomerUtility customerUtil = DependencyInjectorUtility.GetCustomerUtility();
@@ -44,12 +44,14 @@ namespace FinalProject.Forms
             txtSalesPerson.Text = customer.SalesPerson;
             txtPhone.Text = customer.Phone;
             txtSuffix.Text = customer.Suffix;
-            
 
-            
+
+            //Load address
+            fulladdress = customerUtil.GetFullAddress(id);
+
             //variables
             List<CustomerAddress> customeraddressList;
-            List<string> addresstypeList = new List<string>();
+            List<string> FullAddress = new List<string>();
 
             //Load customer address
             customeraddressList = customerUtil.GetCustomerAddress(id);
@@ -62,25 +64,23 @@ namespace FinalProject.Forms
                 foreach (CustomerAddress custadd in customeraddressList)
                 {
                     //add Addresstype to the list
-                    addresstypeList.Add(custadd.AddressType);
-                    //Fill in group box label
-                    lblAddressType.Text = custadd.AddressType;
+                    FullAddress.Add(custadd.AddressType);
 
                 }
             }
-            cbAddressType.DropDownStyle = ComboBoxStyle.DropDownList;//make the combobox read only
-            cbAddressType.DataSource = addresstypeList;
+            cbAddressType.DropDownStyle = ComboBoxStyle.DropDownList; //combobox read only
+            cbAddressType.DataSource = FullAddress;
 
-            
-            
-            //Load address
-            address = customerUtil.GetAddress(id);
+
+
+
 
             //Fill in groupbox labels
-            lblAddressLine1.Text = address.AddressLine1;
-            lblCity.Text = address.City + ",";
-            lblState.Text = address.StateProvince;
-            lblZip.Text = address.PostalCode;
+            lblAddressType.Text = fulladdress.AddressType;
+            lblAddressLine1.Text = fulladdress.AddressLine1;
+            lblCity.Text = fulladdress.City + ",";
+            lblState.Text = fulladdress.StateProvince;
+            lblZip.Text = fulladdress.PostalCode;
 
 
         }
