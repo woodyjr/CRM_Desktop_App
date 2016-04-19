@@ -13,12 +13,11 @@ namespace FinalProject.Data
 {
     public class CustomerUtility : ICustomerUtility
     {
-        public Customer AddCustomerUtility(Customer newCustomer)
+    public Customer AddCustomerUtility(Customer newCustomer)
         {
             throw new NotImplementedException();
         }
-
-        public List<Customer> CustomerSearch(string query)
+    public List<Customer> CustomerSearch(string query)
         {
             
             //Build Sql Connection
@@ -31,8 +30,8 @@ namespace FinalProject.Data
                     SELECT *
                     FROM SalesLT.Customer
                     WHERE
-            FirstName LIKE '%' + @query + '%' OR
-            LastName LIKE '%' + @query + '%'
+                        FirstName LIKE '%' + @query + '%' OR
+                        LastName LIKE '%' + @query + '%'
             ";
 
             cmd.Parameters.AddWithValue("@query", query);
@@ -77,110 +76,158 @@ namespace FinalProject.Data
             //return collection of customers
             return customerObj;
         }
-
-
-    public List<Address> GetAddress(int AddressID)
+    public Address GetAddress(int addressID)
         {
-            //get Address Objects
-            List<Address> colAddress = new List<Address>();
+            //variables
+            Address address = new Address();
 
-            //Build Sql Connection
-            SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
+            //connection
+            SqlCommand cmd = GetDbCommand();
 
-            //Sql Commmand
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SalesLT.Address WHERE AddressID = @AddressID";
-            cmd.Parameters.AddWithValue("@AddressID", AddressID);
+            //Setup Select Statement 
+            cmd.CommandText = @"
+                SELECT * FROM SalesLT.Address
+                WHERE AddressID = @AddressID    
+            ";
+            //query variables
+            cmd.Parameters.AddWithValue("@AddressID", addressID);
 
-            //Open Reader
-            Address AddressObj;
-            AddressObj = null;
+            //DataReader 
             try
             {
-                conn.Open();
+                //open Database Connection
+                cmd.Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                //loop through rows - create
                 while (reader.Read())
                 {
-                    AddressObj = new Address
-                    {
-                        AddressID = (int)reader["AddressID"],
-                        AddressLine1 = (string)reader["AddressLine1"],
-                        AddressLine2 = (string)reader["AddressLine2"],
-                        City = (string)reader["City"],
-                        StateProvince = (string)reader["StateProvince"],
-                        CountryRegion = (string)reader["CountryRegion"],
-                        PostalCode = (float)reader["PostalCode"],
-                        rowguid = (Guid)reader["rowguid"],
-                        ModifiedDate = (DateTime)reader["ModifiedDate"]
-                    };
-                    colAddress.Add(AddressObj);
-                };
+                    Address newAddress = new Address();
+
+                    newAddress.AddressID = (int)reader["AddressID"];
+                    newAddress.AddressLine1 = (string)reader["AddressLine1"];
+                    if (!reader.IsDBNull(reader.GetOrdinal("AddressLine2")))
+                        newAddress.AddressLine2 = (string)reader["AddressLine2"];
+                    newAddress.City = (string)reader["City"];
+                    newAddress.StateProvince = (string)reader["StateProvince"];
+                    newAddress.CountryRegion = (string)reader["CountryRegion"];
+                    newAddress.PostalCode = (string)reader["PostalCode"];
+                    newAddress.rowguid = (Guid)reader["rowguid"];
+                    newAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
+
+                    address = newAddress;
+                }
+                //close the data connection
                 reader.Close();
             }
             catch (Exception ex)
             {
                 throw;
             }
-            //return Addresses object
-            return colAddress;
+            //return collection of Addresses
+            return address;
         }
-
-
     public List<CustomerAddress> GetCustomerAddress(int CustomerID)
         {
-            //get CustomerAddress Objects
-            List<CustomerAddress> colCustomerAddress = new List<CustomerAddress>();
-
-            //Build Sql Connection
+            //Variables
+            List<CustomerAddress> customeraddresses = new List<CustomerAddress>();
+            CustomerAddress custAddress;
+            //connection
             SqlConnection conn = new SqlConnection();
+            //Define connection string
             conn.ConnectionString = "Server=(local)\\sqlexpress;Database=AdventureWorksLT2012;Trusted_Connection=True;";
 
-            //Sql Commmand
+            //Command
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SalesLT.CustomerAddress WHERE CustomerID = @CustomerID";
-            cmd.Parameters.AddWithValue("@CustomerID", CustomerID);
 
-            //Open Reader
-            CustomerAddress CustomerAddressObj;
-            CustomerAddressObj = null;
+            //Setup our SELECT statement. (SQL statement)
+            cmd.CommandText = "SELECT * FROM SalesLT.CustomerAddress WHERE CustomerID = @Id ";
+            cmd.Parameters.AddWithValue("@Id", CustomerID);
+            //DataReader (also a DataAdapter)
             try
             {
+                //open database connection
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                //Loop through rows - create Customer address objects -- may be multiple customer addresses per customer ID 
+                //so after each address model is created- add to the list to be returned
                 while (reader.Read())
                 {
-                    CustomerAddressObj = new CustomerAddress
+                    custAddress = new CustomerAddress
                     {
-                        CustomerID = (int)reader["CustomerID"],
-                        AddressID = (int)reader["AddressID"],
                         AddressType = (string)reader["AddressType"],
-                        rowguid = (Guid)reader["CustomerID"],
-                        ModifiedDate = (DateTime)reader["CustomerID"]
+                        CustomerID = (int)reader["CustomerID"],
+                        AddressID = (int)reader["AddressID"]
                     };
-                    colCustomerAddress.Add(CustomerAddressObj);
-                };
+                    customeraddresses.Add(custAddress);
+
+
+                }
+                //Closes the Database Connection
+                reader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            //Return collection of customer address objects
+            return customeraddresses;
+
+        }
+    public CustomerAddress GetOneCustomerAddress(int AddressID, int CustomerID)
+        {
+            //variables
+            CustomerAddress customerAddress = new CustomerAddress();
+
+            //connection
+            SqlCommand cmd = GetDbCommand();
+
+            //Setup Select Statement 
+            cmd.CommandText = @"
+                SELECT * FROM SalesLT.CustomerAddress
+                WHERE CustomerID = @customerID
+                AND AddressID = @addressID
+             ";
+            //set our database query parameters
+            cmd.Parameters.AddWithValue("@customerID", CustomerID);
+            cmd.Parameters.AddWithValue("@addressID", AddressID);
+
+            //DataReader 
+            try
+            {
+                //open Database Connection
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                //loop through rows - create
+                if (reader.Read())
+                {
+                    customerAddress.CustomerID = (int)reader["CustomerID"];
+                    customerAddress.AddressID = (int)reader["AddressID"];
+                    customerAddress.AddressType = (string)reader["AddressType"];
+                    customerAddress.rowguid = (Guid)reader["rowguid"];
+                    customerAddress.ModifiedDate = (DateTime)reader["ModifiedDate"];
+                }
+                //close the data connection
                 reader.Close();
             }
             catch (Exception ex)
             {
                 throw;
             }
-            //return collection of Customer Addresses
-            return colCustomerAddress;
-
+            //return collection of Addresses
+            return customerAddress;
         }
-
     public List<CustomerInformation> GetCustomerInformation()
     {
         throw new NotImplementedException();
     }
-
     public List<CustomerInformation> GetCustomerInformation(string query)
     {
         throw new NotImplementedException();
     }
-
     public Customer GetCustomers(int Id)
     {
         //variables
@@ -254,7 +301,6 @@ namespace FinalProject.Data
         //return collection of products
         return custToReturn;
     }
-
     public void UpdateCustomer(Customer custToUpdate)
     {
 
@@ -288,7 +334,7 @@ namespace FinalProject.Data
 
 
             //Execute Query
-            try
+        try
         {
             cmd.Connection.Open(); //Open DB Connection
             cmd.ExecuteNonQuery(); //Execute Query
@@ -300,7 +346,6 @@ namespace FinalProject.Data
         }
             
     }
-
     private SqlCommand GetDbCommand()
         {
             //Connection

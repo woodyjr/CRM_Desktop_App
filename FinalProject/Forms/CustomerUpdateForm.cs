@@ -15,7 +15,6 @@ namespace FinalProject.Forms
     public partial class CustomerUpdateForm : Form
     {
         private int id;
-
         public CustomerUpdateForm() 
         {
             InitializeComponent();
@@ -30,6 +29,7 @@ namespace FinalProject.Forms
         {
             //Variables
             Customer customer;
+            Address address;
 
             //Load Customer
             ICustomerUtility customerUtil = DependencyInjectorUtility.GetCustomerUtility();
@@ -44,6 +44,44 @@ namespace FinalProject.Forms
             txtSalesPerson.Text = customer.SalesPerson;
             txtPhone.Text = customer.Phone;
             txtSuffix.Text = customer.Suffix;
+            
+
+            
+            //variables
+            List<CustomerAddress> customeraddressList;
+            List<string> addresstypeList = new List<string>();
+
+            //Load customer address
+            customeraddressList = customerUtil.GetCustomerAddress(id);
+
+            //Populate groupbox
+            if (customeraddressList != null)//As long as the customer in question has addresses
+            {
+
+                //loop through list of customer address objects, pulling the AddressType property and adding it to the list 
+                foreach (CustomerAddress custadd in customeraddressList)
+                {
+                    //add Addresstype to the list
+                    addresstypeList.Add(custadd.AddressType);
+                    //Fill in group box label
+                    lblAddressType.Text = custadd.AddressType;
+
+                }
+            }
+            cbAddressType.DropDownStyle = ComboBoxStyle.DropDownList;//make the combobox read only
+            cbAddressType.DataSource = addresstypeList;
+
+            
+            
+            //Load address
+            address = customerUtil.GetAddress(id);
+
+            //Fill in groupbox labels
+            lblAddressLine1.Text = address.AddressLine1;
+            lblCity.Text = address.City + ",";
+            lblState.Text = address.StateProvince;
+            lblZip.Text = address.PostalCode;
+
 
         }
 
@@ -63,6 +101,7 @@ namespace FinalProject.Forms
                 Phone = txtPhone.Text,
                 Suffix = txtSuffix.Text,
                 CustomerID = this.id
+           
 
             };
 
@@ -87,6 +126,21 @@ namespace FinalProject.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gbAddress_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblState_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

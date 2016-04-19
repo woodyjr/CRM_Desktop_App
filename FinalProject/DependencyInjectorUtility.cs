@@ -12,8 +12,7 @@ namespace FinalProject
         {
             //return new DbCustomerUtility();
             return new Data.DbCustomerUtility();
-
-            //Push to github
+            
         }
 
     }
