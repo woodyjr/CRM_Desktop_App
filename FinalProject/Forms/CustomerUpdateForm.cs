@@ -44,6 +44,7 @@ namespace FinalProject.Forms
             txtSalesPerson.Text = customer.SalesPerson;
             txtPhone.Text = customer.Phone;
             txtSuffix.Text = customer.Suffix;
+            lblCustName.Text = customer.FirstName + " " + customer.LastName;
 
 
             //Load address
@@ -70,17 +71,12 @@ namespace FinalProject.Forms
             }
             cbAddressType.DropDownStyle = ComboBoxStyle.DropDownList; //combobox read only
             cbAddressType.DataSource = FullAddress;
-
-
-
-
+            
 
             //Fill in groupbox labels
             lblAddressType.Text = fulladdress.AddressType;
             lblAddressLine1.Text = fulladdress.AddressLine1;
-            lblCity.Text = fulladdress.City + ",";
-            lblState.Text = fulladdress.StateProvince;
-            lblZip.Text = fulladdress.PostalCode;
+            lblCityStateZip.Text = fulladdress.City + ","+ " " + fulladdress.StateProvince + " " + fulladdress.PostalCode;
 
 
         }

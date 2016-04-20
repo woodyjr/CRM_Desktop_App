@@ -88,7 +88,7 @@
             this.Controls.Add(this.txtCustomersSearch);
             this.Controls.Add(this.label1);
             this.Name = "CustomersSearchForm";
-            this.Text = "CustomersSearchForm";
+            this.Text = "Customers Search Form";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
