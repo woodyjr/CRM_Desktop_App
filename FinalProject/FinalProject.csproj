@@ -55,34 +55,52 @@
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerAddForm.cs">
+    <Compile Include="Customer Forms\CustomerAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerAddForm.Designer.cs">
+    <Compile Include="Customer Forms\CustomerAddForm.Designer.cs">
       <DependentUpon>CustomerAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomersSearchForm.cs">
+    <Compile Include="Customer Forms\CustomersSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomersSearchForm.Designer.cs">
+    <Compile Include="Customer Forms\CustomersSearchForm.Designer.cs">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerUtility.cs" />
-    <Compile Include="Data\DbCustomerUtility.cs" />
-    <Compile Include="DependencyInjectorUtility.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductDescription.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductModelProductDescription.cs" />
+    <Compile Include="ProductForms\ProductSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="ProductForms\ProductSearchForm.Designer.cs">
+      <DependentUpon>ProductSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductForms\View Model\ProductViewModel.cs" />
+    <Compile Include="ProductForms\viewProductsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForms\viewProductsForm.Designer.cs">
+      <DependentUpon>viewProductsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\CustomerUtility.cs" />
+    <Compile Include="Utilities\DbCustomerUtility.cs" />
+    <Compile Include="Utilities\DbProductUtility.cs" />
+    <Compile Include="Utilities\DependencyInjectorUtility.cs" />
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerUpdateForm.cs">
+    <Compile Include="Customer Forms\CustomerUpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerUpdateForm.Designer.cs">
+    <Compile Include="Customer Forms\CustomerUpdateForm.Designer.cs">
       <DependentUpon>CustomerUpdateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ICustomerUtility.cs" />
+    <Compile Include="Utilities\ICustomerUtility.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAddress.cs" />
@@ -93,20 +111,27 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\IProductUtility.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerAddForm.resx">
+    <EmbeddedResource Include="Customer Forms\CustomerAddForm.resx">
       <DependentUpon>CustomerAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomersSearchForm.resx">
+    <EmbeddedResource Include="Customer Forms\CustomersSearchForm.resx">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerUpdateForm.resx">
+    <EmbeddedResource Include="Customer Forms\CustomerUpdateForm.resx">
       <DependentUpon>CustomerUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\ProductSearchForm.resx">
+      <DependentUpon>ProductSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\viewProductsForm.resx">
+      <DependentUpon>viewProductsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

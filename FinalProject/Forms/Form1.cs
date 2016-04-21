@@ -1,6 +1,7 @@
 ﻿using FinalProject.Customer_Forms.View_Model;
 using FinalProject.Forms;
 using FinalProject.Models;
+using FinalProject.ProductForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,11 @@ namespace FinalProject
             custSearchForm.ShowDialog();
         }
 
+        private void searchForProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductSearchForm prodSearchForm = new ProductSearchForm();
+            prodSearchForm.ShowDialog();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -48,7 +54,11 @@ namespace FinalProject
         {
             this.Close();
         }
-
+        private void viewAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewProductsForm viewProdForm = new viewProductsForm();
+            viewProdForm.ShowDialog();
+        }
 
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -61,5 +71,6 @@ namespace FinalProject
 
         }
 
+        
     }
 }

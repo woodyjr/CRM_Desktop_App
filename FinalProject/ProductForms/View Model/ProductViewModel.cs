@@ -1,13 +1,35 @@
-﻿using System;
+﻿using FinalProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Models
+namespace FinalProject.ProductForms.View_Model
 {
-    public class Product
+    class ProductViewModel
     {
+        public ProductViewModel(Product prod)
+        {
+            ProductID = prod.ProductID;
+            Name = prod.Name;
+            ProductNumber = prod.ProductNumber;
+            Color = prod.Color;
+            StandardCost = prod.StandardCost;
+            ListPrice = prod.ListPrice;
+            Size = prod.Size;
+            Weight = prod.Weight;
+            ProductCategoryID = prod.ProductCategoryID;
+            ProductModelID = prod.ProductModelID;
+            SellStartDate = prod.SellStartDate;
+            SellEndDate = prod.SellEndDate;
+            DiscontinuedDate = prod.DiscontinuedDate;
+            ThumbNailPhoto = prod.ThumbNailPhoto;
+            ThumbnailPhotoFileName = prod.ThumbnailPhotoFileName;
+            rowguid = prod.rowguid;
+            ModifiedDate = prod.ModifiedDate;
+        }
+
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string ProductNumber { get; set; }

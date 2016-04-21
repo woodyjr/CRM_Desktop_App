@@ -1,33 +1,13 @@
-﻿using FinalProject.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject
+namespace FinalProject.Models
 {
-    class CustomerSearchViewModel
+    public class CustomerInformation
     {
-        public CustomerSearchViewModel(Customer cust)
-        {
-            CustomerID = cust.CustomerID;
-            NameStyle = cust.NameStyle;
-            Title = cust.Title;
-            FirstName = cust.FirstName;
-            MiddleName = cust.MiddleName;
-            LastName = cust.LastName;
-            Suffix = cust.Suffix;
-            CompanyName = cust.CompanyName;
-            SalesPerson = cust.SalesPerson;
-            EmailAddress = cust.EmailAddress;
-            Phone = cust.Phone;
-            PasswordHash = cust.PasswordHash;
-            PasswordSalt = cust.PasswordSalt;
-            rowguid = cust.rowguid;
-            ModifiedDate = cust.ModifiedDate;
-
-        }
         public int CustomerID { get; set; }
         public Boolean NameStyle { get; set; }
         public string Title { get; set; }
@@ -41,6 +21,14 @@ namespace FinalProject
         public string Phone { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
+        public int AddressID { get; set; }
+        public string AddressType { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string StateProvince { get; set; }
+        public string CountryRegion { get; set; }
+        public float PostalCode { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

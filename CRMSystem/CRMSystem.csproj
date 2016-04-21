@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -42,7 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\CustomerInformation.cs" />
+    <Compile Include="Models\FullAddress.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CustomerUtility.cs" />
+    <Compile Include="Utilities\DbCustomerUtility.cs" />
+    <Compile Include="Utilities\DependencyInjectorUtility.cs" />
+    <Compile Include="Utilities\ICustomerUtility.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
