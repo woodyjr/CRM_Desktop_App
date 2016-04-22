@@ -60,7 +60,11 @@ namespace FinalProject
             viewProdForm.ShowDialog();
         }
 
-
+        private void addProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductAddForm prodAddForm = new ProductAddForm();
+            prodAddForm.ShowDialog();
+        }
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -71,6 +75,6 @@ namespace FinalProject
 
         }
 
-        
+       
     }
 }

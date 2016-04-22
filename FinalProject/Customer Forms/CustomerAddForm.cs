@@ -38,9 +38,7 @@ namespace FinalProject.Forms
                 CompanyName = txtCompName.Text,
                 SalesPerson = txtSalesPerson.Text,
                 Phone = txtPhone.Text,
-                Suffix = txtSuffix.Text,
-                PasswordHash = txtPassHash.Text,
-                PasswordSalt = txtPassSalt.Text
+                Suffix = txtSuffix.Text
 
             };
 

@@ -287,7 +287,73 @@ namespace FinalProject.Utilities
         {
             throw new NotImplementedException();
         }
+        public Product AddProductUtility(Product newProduct)
+        {
+            //Variables
+            Product productToReturn = null;
 
+            //Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"
+                INSERT INTO SalesLT.Product
+                (ProductNumber, Name, Color, ListPrice, Weight, Size, StandardCost, SellStartDate)
+                VALUES
+                (@ProductNumber, @Name, @Color, @ListPrice, @Weight, @Size, @StandardCost, @SellStartDate);
+
+                SELECT * from SalesLT.Product WHERE ProductID = @@Identity;
+             ";
+
+            //set our database Query Parameters
+            cmd.Parameters.AddWithValue("@ProductNumber", newProduct.ProductNumber);
+            cmd.Parameters.AddWithValue("@Name", newProduct.Name);
+            cmd.Parameters.AddWithValue("@Color", newProduct.Color);
+            cmd.Parameters.AddWithValue("@ListPrice", newProduct.ListPrice);
+            cmd.Parameters.AddWithValue("@Weight", newProduct.Weight);
+            cmd.Parameters.AddWithValue("@Size", newProduct.Size);
+            cmd.Parameters.AddWithValue("@StandardCost", newProduct.StandardCost);
+            cmd.Parameters.AddWithValue("@SellStartDate", newProduct.SellStartDate);
+
+            //Execute Query
+            SqlDataReader reader;
+            try
+            {
+                cmd.Connection.Open();
+                reader = cmd.ExecuteReader();
+
+                //Building a new Product Object
+                if (reader.Read())
+                {
+                    productToReturn = BuildProduct(reader);
+                }
+
+                cmd.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+
+            //Return new Object
+            return productToReturn;
+        }
+        private static Product BuildProduct(SqlDataReader reader)
+        {
+            return new Product
+            {
+                ProductNumber = (string)reader["ProductNumber"],
+                Name = (string)reader["Name"],
+                Color = (string)reader["Color"],
+                ListPrice = (decimal)reader["ListPrice"],
+                Weight = (decimal)reader["deciaml"],
+                Size = (string)reader["Size"],
+                StandardCost = (decimal)reader["StandardCost"],
+                SellStartDate = (DateTime)reader["SellStartDate"],
+                ModifiedDate = (DateTime)reader["ModifiedDate"]
+            };
+        }
         //Connection string
         private SqlCommand GetDbCommand()
         {

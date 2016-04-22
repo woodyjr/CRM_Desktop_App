@@ -15,6 +15,7 @@ namespace FinalProject.Utilities
         List<ProductModel> GetProductModelList();
         List<ProductModelProductDescription> GetProductModelProductDescription();
         List<Product> ProductSearch(string query);
+        Product AddProductUtility(Product newProduct);
 
     }
 }

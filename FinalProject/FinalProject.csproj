@@ -71,6 +71,12 @@
     <Compile Include="Models\ProductDescription.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductModelProductDescription.cs" />
+    <Compile Include="ProductForms\ProductAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForms\ProductAddForm.Designer.cs">
+      <DependentUpon>ProductAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductForms\ProductSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer Forms\CustomerUpdateForm.resx">
       <DependentUpon>CustomerUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\ProductAddForm.resx">
+      <DependentUpon>ProductAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForms\ProductSearchForm.resx">
       <DependentUpon>ProductSearchForm.cs</DependentUpon>
