@@ -30,7 +30,7 @@ namespace FinalProject
 
         private void searchForProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProductSearchForm prodSearchForm = new ProductSearchForm();
+            ViewProductForm prodSearchForm = new ViewProductForm();
             prodSearchForm.ShowDialog();
         }
         private void Form1_Load(object sender, EventArgs e)

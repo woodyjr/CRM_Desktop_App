@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.ProductForms.User_Controls;
 using FinalProject.ProductForms.View_Model;
 using FinalProject.Utilities;
 using System;
@@ -13,21 +14,33 @@ using System.Windows.Forms;
 
 namespace FinalProject.ProductForms
 {
-    public partial class ProductSearchForm : Form
+    public partial class ViewProductForm : Form
     {
-        public ProductSearchForm()
+        public ViewProductForm()
         {
             InitializeComponent();
         }
 
-        private void btnProdSearch_Click(object sender, EventArgs e)
+        private void btnSearch(object sender, EventArgs e)
         {
-            ViewProductForm searchProd = new ViewProductForm();
-            searchProd.ShowDialog();
+
+
+        }
+
+
+        private void btnProductSearch(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            flpProducts.Controls.Clear(); //removes existing controls
 
             IProductUtility prodUtil = DependencyInjectorUtility.GetProductsUtility();
 
             if (string.IsNullOrWhiteSpace(txtProductSearch.Text)) { MessageBox.Show("Product Search value required."); return; }
+
 
             //good search
             List<Product> prodSearchResults = prodUtil.ProductSearch(txtProductSearch.Text);
@@ -35,16 +48,17 @@ namespace FinalProject.ProductForms
             List<ProductViewModel> psVMCollection = new List<ProductViewModel>();
             foreach (Product prodDTO in prodSearchResults)
             {
-                //create new view model object
-                ProductViewModel psVM = new ProductViewModel(prodDTO);
+                ucProdSearch puc = new ucProdSearch(prodDTO);
 
-                //add to psVMVollection collection
-                psVMCollection.Add(psVM);
+                flpProducts.Controls.Add(puc);
             }
+        }
 
-            //datasource grid view
-            dgvProductSearch.DataSource = null;
-            dgvProductSearch.DataSource = psVMCollection;
+        private void flpProducts_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ProductViewModel productVM = null;
+            ProductUpdateForm prodUpdateForm = new ProductUpdateForm();
+            prodUpdateForm.ShowDialog();
         }
     }
 }

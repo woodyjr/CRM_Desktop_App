@@ -367,5 +367,98 @@ namespace FinalProject.Utilities
 
             return cmd;
         }
+
+        public Product GetProductList(int ProductId)
+        {
+            //variables
+            Product prodToReturn = null;
+
+            //Getting Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"SELECT * FROM SalesLT.Product 
+                                WHERE ProductID = @Id
+                            ";
+            cmd.Parameters.AddWithValue("@Id", ProductId);
+
+            //DataReader (also data adaptor)
+            try
+            {
+                //open the connections
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                //Loop through rows - create customer objects
+                if (reader.Read())
+                {
+                    prodToReturn = new Product
+                    {
+                        Name = (string)reader["Name"],
+                        ListPrice = (decimal)reader["ListPrice"],
+                        StandardCost = (decimal)reader["StandardCost"]
+                    };
+                    if (!reader.IsDBNull(reader.GetOrdinal("Color")))
+                        prodToReturn.Color = (string)reader["Color"];
+                    if (!reader.IsDBNull(reader.GetOrdinal("Size")))
+                        prodToReturn.Size = (string)reader["Size"];
+                    if (!reader.IsDBNull(reader.GetOrdinal("Weight")))
+                        prodToReturn.Weight = (decimal)reader["Weight"];
+                        prodToReturn.SellStartDate = (DateTime)reader["SellStartDate"];
+                    if (!reader.IsDBNull(reader.GetOrdinal("ThumbNailPhoto")))
+                        prodToReturn.ThumbNailPhoto = (byte[])reader["ThumbNailPhoto"];
+                        prodToReturn.rowguid = (Guid)reader["rowguid"];
+                        prodToReturn.ModifiedDate = (DateTime)reader["ModifiedDate"];
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            //return collection of customers
+            return prodToReturn;
+        }
+        public void UpdateProduct(Product prodToUpdate)
+        {
+            //Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"
+            UPDATE SalesLT.Product
+            SET Name = @Name,
+                ListPrice = @ListPrice,
+                StandardCost = @StandardCost,
+                Weight = @Weight,
+                Color = @Color,
+                SellStartDate = @SellStartDate,
+                SellEndDate = @SellEndDate
+            WHERE ProductID = @ProductID
+        ";
+
+            //set our database Query Parameters
+            cmd.Parameters.AddWithValue("@Name", prodToUpdate.Name);
+            cmd.Parameters.AddWithValue("@ListPrice", prodToUpdate.ListPrice);
+            cmd.Parameters.AddWithValue("@StandardCost", prodToUpdate.StandardCost);
+            cmd.Parameters.AddWithValue("@Weight", prodToUpdate.Weight);
+            cmd.Parameters.AddWithValue("@Color", prodToUpdate.Color);
+            cmd.Parameters.AddWithValue("@SellStartDate", prodToUpdate.SellStartDate);
+            cmd.Parameters.AddWithValue("@SellEndDate", prodToUpdate.SellEndDate);
+            cmd.Parameters.AddWithValue("@ProductID", prodToUpdate.ProductID);
+
+            //Execute Query
+            try
+            {
+                cmd.Connection.Open(); //Open DB Connection
+                cmd.ExecuteNonQuery(); //Execute Query
+                cmd.Connection.Close(); //Close DB Connection
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

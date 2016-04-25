@@ -83,7 +83,25 @@
     <Compile Include="ProductForms\ProductSearchForm.Designer.cs">
       <DependentUpon>ProductSearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductForms\ProductUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForms\ProductUpdateForm.Designer.cs">
+      <DependentUpon>ProductUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductForms\User Controls\ucProdSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProductForms\User Controls\ucProdSearch.Designer.cs">
+      <DependentUpon>ucProdSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductForms\View Model\ProductViewModel.cs" />
+    <Compile Include="ProductForms\ViewProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForms\ViewProductForm.Designer.cs">
+      <DependentUpon>ViewProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductForms\viewProductsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +156,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForms\ProductSearchForm.resx">
       <DependentUpon>ProductSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\ProductUpdateForm.resx">
+      <DependentUpon>ProductUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\User Controls\ucProdSearch.resx">
+      <DependentUpon>ucProdSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForms\ViewProductForm.resx">
+      <DependentUpon>ViewProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForms\viewProductsForm.resx">
       <DependentUpon>viewProductsForm.cs</DependentUpon>

@@ -101,7 +101,7 @@ namespace FinalProject.Forms
 
             };
 
-            //IInventoryUtility
+            //ICustomerUtility
             ICustomerUtility custUtil = DependencyInjectorUtility.GetCustomerUtility();
 
             //UpdateProduct

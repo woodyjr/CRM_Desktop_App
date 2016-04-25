@@ -11,11 +11,13 @@ namespace FinalProject.Utilities
     {
         List<ProductCategory> GetProductCategoryList();
         List<Product> GetProductList();
+        Product GetProductList(int ProductId);
         List<ProductDescription> GetProductDescriptionList();
         List<ProductModel> GetProductModelList();
         List<ProductModelProductDescription> GetProductModelProductDescription();
         List<Product> ProductSearch(string query);
         Product AddProductUtility(Product newProduct);
+        void UpdateProduct(Product newProduct);
 
     }
 }
