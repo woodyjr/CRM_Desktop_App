@@ -15,6 +15,7 @@ namespace FinalProject.Utilities
         List<ProductDescription> GetProductDescriptionList();
         List<ProductModel> GetProductModelList();
         List<ProductModelProductDescription> GetProductModelProductDescription();
+        void UpdateProductPicture(int productId, byte[] buffer);
         List<Product> ProductSearch(string query);
         Product AddProductUtility(Product newProduct);
         void UpdateProduct(Product newProduct);

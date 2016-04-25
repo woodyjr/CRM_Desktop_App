@@ -46,6 +46,7 @@
             this.dtpProdUpdate = new System.Windows.Forms.DateTimePicker();
             this.dtpSellEndDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             this.lnkChangePicture.TabStop = true;
             this.lnkChangePicture.Text = "Change Picture";
             this.lnkChangePicture.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkChangePicture.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChangePicture_LinkClicked);
             // 
             // picBoxPicture
             // 
@@ -201,6 +203,10 @@
             this.label6.TabIndex = 31;
             this.label6.Text = "Sell End Date";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // ProductUpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,5 +259,6 @@
         private System.Windows.Forms.DateTimePicker dtpProdUpdate;
         private System.Windows.Forms.DateTimePicker dtpSellEndDate;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

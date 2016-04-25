@@ -460,5 +460,35 @@ namespace FinalProject.Utilities
                 throw;
             }
         }
+
+        public void UpdateProductPicture(int productId, byte[] buffer)
+        {
+            //Command
+            SqlCommand cmd = GetDbCommand();
+
+            //Set up select statement
+            cmd.CommandText = @"
+                UPDATE SalesLT.Product
+                SET ThumbNailPhoto = @ThumbNailPhoto
+                WHERE ProductID = @ProductID
+            ";
+
+            //set our database Query Parameters
+            DateTime lastModified = DateTime.Now;
+            cmd.Parameters.AddWithValue("@ThumbNailPhoto", buffer);
+            cmd.Parameters.AddWithValue("@ProductID", productId);
+
+            //Execute Query
+            try
+            {
+                cmd.Connection.Open(); //Open DB Connection
+                cmd.ExecuteNonQuery(); //Execute Query
+                cmd.Connection.Close(); //Close DB Connection
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

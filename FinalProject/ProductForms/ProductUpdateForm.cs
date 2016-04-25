@@ -113,5 +113,43 @@ namespace FinalProject.ProductForms
         {
             this.Close();
         }
+
+        private void lnkChangePicture_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //Show dialog
+            openFileDialog1.Filter = "Image Files(*.BMP; *.JPG; *.GIF)| *.BMP; *.JPG; *.GIF | All files(*.*) | *.*";
+            openFileDialog1.CheckFileExists = true;
+            var dialogResult = openFileDialog1.ShowDialog();
+
+            //Verify a file was selected
+            string filePath = string.Empty;
+            if (dialogResult == DialogResult.OK)
+            {
+                //Capture the file selected
+                filePath = openFileDialog1.FileName;
+
+            }
+            else
+            {
+                MessageBox.Show("No file selected");
+                return;
+            }
+
+            //Read stream place the data into a buffer
+            byte[] buffer;
+            using (FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                buffer = new byte[fStream.Length];
+                fStream.Read(buffer, 0, buffer.Length);
+            }
+
+
+            //Send the buffer, along with the product id to our Inventoryutility
+            IProductUtility prodUtil = DependencyInjectorUtility.GetProductsUtility();
+            prodUtil.UpdateProductPicture(id, buffer);
+
+            //Show new picture
+            ShowPicture(buffer);
+        }
     }
 }
