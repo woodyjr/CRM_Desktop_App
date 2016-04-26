@@ -95,7 +95,6 @@ namespace FinalProject.Order_Forms.View_Model
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show(ex.Message);
             }
             //Close the form
             this.Close();

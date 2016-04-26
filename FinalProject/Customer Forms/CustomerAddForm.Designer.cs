@@ -45,6 +45,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtPassHash = new System.Windows.Forms.TextBox();
+            this.txtPassSalt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtFName
@@ -77,21 +81,21 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(410, 150);
+            this.txtPhone.Location = new System.Drawing.Point(410, 113);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(100, 20);
             this.txtPhone.TabIndex = 5;
             // 
             // txtSalesPerson
             // 
-            this.txtSalesPerson.Location = new System.Drawing.Point(410, 104);
+            this.txtSalesPerson.Location = new System.Drawing.Point(410, 71);
             this.txtSalesPerson.Name = "txtSalesPerson";
             this.txtSalesPerson.Size = new System.Drawing.Size(100, 20);
             this.txtSalesPerson.TabIndex = 6;
             // 
             // txtCompName
             // 
-            this.txtCompName.Location = new System.Drawing.Point(410, 59);
+            this.txtCompName.Location = new System.Drawing.Point(410, 26);
             this.txtCompName.Name = "txtCompName";
             this.txtCompName.Size = new System.Drawing.Size(100, 20);
             this.txtCompName.TabIndex = 8;
@@ -142,7 +146,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(322, 62);
+            this.label5.Location = new System.Drawing.Point(322, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 14;
@@ -151,7 +155,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(335, 107);
+            this.label6.Location = new System.Drawing.Point(335, 74);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 15;
@@ -160,7 +164,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(366, 153);
+            this.label7.Location = new System.Drawing.Point(366, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 16;
@@ -168,7 +172,7 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(304, 258);
+            this.btnAddCustomer.Location = new System.Drawing.Point(325, 289);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(100, 23);
             this.btnAddCustomer.TabIndex = 18;
@@ -178,7 +182,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(435, 258);
+            this.btnCancel.Location = new System.Drawing.Point(448, 289);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 19;
@@ -186,11 +190,47 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(330, 197);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Password Salt";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(323, 156);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Password Hash";
+            // 
+            // txtPassHash
+            // 
+            this.txtPassHash.Location = new System.Drawing.Point(410, 153);
+            this.txtPassHash.Name = "txtPassHash";
+            this.txtPassHash.Size = new System.Drawing.Size(100, 20);
+            this.txtPassHash.TabIndex = 21;
+            // 
+            // txtPassSalt
+            // 
+            this.txtPassSalt.Location = new System.Drawing.Point(410, 197);
+            this.txtPassSalt.Name = "txtPassSalt";
+            this.txtPassSalt.Size = new System.Drawing.Size(100, 20);
+            this.txtPassSalt.TabIndex = 20;
+            // 
             // CustomerAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 294);
+            this.ClientSize = new System.Drawing.Size(551, 324);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtPassHash);
+            this.Controls.Add(this.txtPassSalt);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAddCustomer);
             this.Controls.Add(this.label7);
@@ -209,7 +249,7 @@
             this.Controls.Add(this.txtMName);
             this.Controls.Add(this.txtFName);
             this.Name = "CustomerAddForm";
-            this.Text = "CustomerAddForm";
+            this.Text = "Add Customer";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +274,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtPassHash;
+        private System.Windows.Forms.TextBox txtPassSalt;
     }
 }

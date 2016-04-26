@@ -30,8 +30,12 @@ namespace FinalProject.ProductForms.User_Controls
 
             lblName.Text = _product.Name;
             lblPrice.Text = string.Format("{0:c}", _product.ListPrice);
-            Stream picStream = new MemoryStream(_product.ThumbNailPhoto);
-            picBoxProduct.Image = new System.Drawing.Bitmap(picStream);
+            if(_product.ThumbNailPhoto != null)
+            {
+                Stream picStream = new MemoryStream(_product.ThumbNailPhoto);
+                picBoxProduct.Image = new System.Drawing.Bitmap(picStream);
+            }
+            
 
             //Register double click for all
             foreach (Control child in this.Controls)

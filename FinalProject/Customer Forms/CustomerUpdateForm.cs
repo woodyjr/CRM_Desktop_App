@@ -113,7 +113,6 @@ namespace FinalProject.Forms
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show(ex.Message);
             }
             //Close the form
             this.Close();

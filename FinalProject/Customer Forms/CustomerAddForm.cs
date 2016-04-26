@@ -38,7 +38,9 @@ namespace FinalProject.Forms
                 CompanyName = txtCompName.Text,
                 SalesPerson = txtSalesPerson.Text,
                 Phone = txtPhone.Text,
-                Suffix = txtSuffix.Text
+                Suffix = txtSuffix.Text,
+                PasswordHash = txtPassHash.Text,
+                PasswordSalt = txtPassSalt.Text
 
             };
 
@@ -54,8 +56,7 @@ namespace FinalProject.Forms
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show(ex.Message);
-                return;
+                this.Close();
             }
             //Close the form
             this.Close();

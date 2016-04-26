@@ -81,7 +81,6 @@ namespace FinalProject.ProductForms
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show("Product Added.");
                 this.Close();
             }
             //Close the form

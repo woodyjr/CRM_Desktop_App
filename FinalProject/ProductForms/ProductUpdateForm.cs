@@ -41,8 +41,10 @@ namespace FinalProject.ProductForms
             txtWeight.Text = product.Weight.ToString();
 
             //Load picture
-            ShowPicture(product.ThumbNailPhoto);
-
+            if (product.ThumbNailPhoto != null)
+            {
+                ShowPicture(product.ThumbNailPhoto);
+            }
 
         }
 
@@ -96,7 +98,6 @@ namespace FinalProject.ProductForms
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show(ex.Message);
             }
             //Close the form
             this.Close();

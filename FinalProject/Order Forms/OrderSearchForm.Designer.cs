@@ -65,6 +65,9 @@
             // 
             this.dgvOrderSearch.AllowUserToAddRows = false;
             this.dgvOrderSearch.AllowUserToDeleteRows = false;
+            this.dgvOrderSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrderSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrderSearch.Location = new System.Drawing.Point(-1, 47);
             this.dgvOrderSearch.Name = "dgvOrderSearch";

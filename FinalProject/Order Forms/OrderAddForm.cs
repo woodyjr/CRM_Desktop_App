@@ -65,7 +65,6 @@ namespace FinalProject.Order_Forms
             {
                 //Logging*
                 //Error Handling*
-                MessageBox.Show(ex.Message);
                 return;
             }
             //Close the form
