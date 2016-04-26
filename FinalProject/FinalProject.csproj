@@ -49,10 +49,10 @@
   <ItemGroup>
     <Compile Include="Customer Forms\View Model\CustomerInformationViewModel.cs" />
     <Compile Include="Customer Forms\View Model\CustomerSearchViewModel.cs" />
-    <Compile Include="Forms\AboutForm.cs">
+    <Compile Include="General Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AboutForm.Designer.cs">
+    <Compile Include="General Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer Forms\CustomerAddForm.cs">
@@ -71,6 +71,25 @@
     <Compile Include="Models\ProductDescription.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductModelProductDescription.cs" />
+    <Compile Include="Order Forms\OrderAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Forms\OrderAddForm.Designer.cs">
+      <DependentUpon>OrderAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order Forms\OrderSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Forms\OrderSearchForm.Designer.cs">
+      <DependentUpon>OrderSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order Forms\View Model\OrderSearchViewModel.cs" />
+    <Compile Include="Order Forms\OrderUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Forms\OrderUpdateForm.Designer.cs">
+      <DependentUpon>OrderUpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductForms\ProductAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,12 +129,13 @@
     </Compile>
     <Compile Include="Utilities\CustomerUtility.cs" />
     <Compile Include="Utilities\DbCustomerUtility.cs" />
+    <Compile Include="Utilities\DbOrderUtility.cs" />
     <Compile Include="Utilities\DbProductUtility.cs" />
     <Compile Include="Utilities\DependencyInjectorUtility.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="General Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
+    <Compile Include="General Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer Forms\CustomerUpdateForm.cs">
@@ -135,8 +155,9 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\IOrderUtility.cs" />
     <Compile Include="Utilities\IProductUtility.cs" />
-    <EmbeddedResource Include="Forms\AboutForm.resx">
+    <EmbeddedResource Include="General Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer Forms\CustomerAddForm.resx">
@@ -145,11 +166,20 @@
     <EmbeddedResource Include="Customer Forms\CustomersSearchForm.resx">
       <DependentUpon>CustomersSearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
+    <EmbeddedResource Include="General Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer Forms\CustomerUpdateForm.resx">
       <DependentUpon>CustomerUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order Forms\OrderAddForm.resx">
+      <DependentUpon>OrderAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order Forms\OrderSearchForm.resx">
+      <DependentUpon>OrderSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order Forms\OrderUpdateForm.resx">
+      <DependentUpon>OrderUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForms\ProductAddForm.resx">
       <DependentUpon>ProductAddForm.cs</DependentUpon>
@@ -192,7 +222,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

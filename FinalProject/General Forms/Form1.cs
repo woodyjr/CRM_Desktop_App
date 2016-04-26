@@ -1,6 +1,7 @@
 ﻿using FinalProject.Customer_Forms.View_Model;
 using FinalProject.Forms;
 using FinalProject.Models;
+using FinalProject.Order_Forms;
 using FinalProject.ProductForms;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,6 @@ namespace FinalProject
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void addCustomerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,6 +75,16 @@ namespace FinalProject
 
         }
 
-       
+        private void findSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderSearchForm orderSearchForm = new OrderSearchForm();
+            orderSearchForm.ShowDialog();
+        }
+
+        private void addSalesOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderAddForm orderAddForm = new OrderAddForm();
+            orderAddForm.ShowDialog();
+        }
     }
 }

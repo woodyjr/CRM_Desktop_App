@@ -18,5 +18,9 @@ namespace FinalProject
         {
             return new Utilities.DbProductUtility();
         }
+        public static IOrderUtility GetOrdersUtility()
+        {
+            return new DbOrderUtility();
+        }
     }
 }

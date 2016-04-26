@@ -1,13 +1,38 @@
-﻿using System;
+﻿using FinalProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Models
+namespace FinalProject.Order_Forms.View_Model
 {
-    public class Order
+    class OrderSearchViewModel
     {
+        public OrderSearchViewModel(Order order)
+        {
+            SalesOrderID = order.SalesOrderID;
+            RevisionNumber = order.RevisionNumber;
+            OrderDate = order.OrderDate;
+            DueDate = order.DueDate;
+            ShipDate = order.ShipDate;
+            Status = order.Status;
+            OnlineOrderFlag = order.OnlineOrderFlag;
+            SalesOrderNumber = order.SalesOrderNumber;
+            PurchaseOrderNumber = order.PurchaseOrderNumber;
+            AccountNumber = order.AccountNumber;
+            CustomerID = order.CustomerID;
+            ShipToAddressID = order.ShipToAddressID;
+            ShipMethod = order.ShipMethod;
+            CreditCardApprovalCode = order.CreditCardApprovalCode;
+            SubTotal = order.SubTotal;
+            Freight = order.Freight;
+            TotalDue = order.TotalDue;
+            Comment = order.Comment;
+            RowGuid = order.RowGuid;
+            ModifiedDate = order.ModifiedDate;
+
+        }
         public int SalesOrderID { get; set; }
         public int RevisionNumber { get; set; }
         public DateTime OrderDate { get; set; }
